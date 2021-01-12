@@ -8,21 +8,10 @@
         <title>Doccure - Register</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-
-		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		
-		<!-- Main CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
-		
-		<!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.min.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('backend/assets/img/favicon.png') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     </head>
     <body>
 	
@@ -38,21 +27,35 @@
 							<div class="login-right-wrap">
 								<h1>Register</h1>
 								<p class="account-subtitle">Access to our dashboard</p>
+
+								@if( $errors -> any() )
+									<p class="alert alert-danger">{{ $errors -> first() }}<button class="close" data-dismiss="alert">&times;</button></p>
+									{{-- @foreach ($errors -> all() as $err)									
+										<p class="alert alert-danger">{{ $err }}<button class="close" data-dismiss="alert">&times;</button></p>
+									@endforeach --}}
+								@endif
 								
+								@if( Session::has('success') )
+									<p class="alert alert-success">{{ Session::get('success') }}<button class="close" data-dismiss="alert">&times;</button></p>
+								@endif
 								<!-- Form -->
-								<form action="https://dreamguys.co.in/demo/doccure/admin/login.html">
+								<form action="{{ route('admin.register') }}" method="POST">
+									@csrf
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Name">
+										<input name="name" class="form-control" type="text" placeholder="Name">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Email">
+										<input name="username" class="form-control" type="text" placeholder="Username">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Password">
+										<input name="email" class="form-control" type="text" placeholder="E-mail">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Confirm Password">
+										<input name="password" class="form-control" type="text" placeholder="Password">
 									</div>
+									{{-- <div class="form-group">
+										<input name="password" class="form-control" type="text" placeholder="Confirm Password">
+									</div> --}}
 									<div class="form-group mb-0">
 										<button class="btn btn-primary btn-block" type="submit">Register</button>
 									</div>
@@ -81,16 +84,10 @@
 		<!-- /Main Wrapper -->
 		
 		<!-- jQuery -->
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-		
-		<!-- Bootstrap Core JS -->
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-		
-		<!-- Custom JS -->
-		<script src="assets/js/script.js"></script>
+        <script src="{{ asset('backend/assets/js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/script.js') }}"></script>
 		
     </body>
-
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:53 GMT -->
 </html>
